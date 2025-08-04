@@ -1,20 +1,21 @@
-import { useState } from "react";
 import styled from "styled-components";
 import googleIcon from "../../assets/icons/web_neutral_rd_na@2x.png";
 
 const StyledCnt = styled.div`
-  width: 427px;
-  height: 100vh;
-  margin: auto;
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 30%;
   text-align: center;
-  padding: 60px;
   font-size: 16px;
 `;
-const StyledTitle = styled.div`
+const StyledTitle = styled.h1`
   font-size: 34px;
-  margin-top: 70px;
+  margin-bottom: 10%;
 `;
-const StyledFieldLabel = styled.div`
+const StyledFieldWrapper = styled.div`
+  margin-bottom: 20px;
+`;
+const StyledFieldLabel = styled.h2`
   text-align: left;
   padding-left: 8px;
   padding-bottom: 4px;
@@ -24,21 +25,28 @@ const StyledField = styled.input`
   height: 50px;
   border: none;
   background-color: #dddddd;
-  padding: 10px;
+  padding: 10px 0;
   margin-bottom: 20px;
   &:focus {
     outline: none;
+  }
+  &::placeholder {
+    color: gray;
+    font-style: italic;
+    opacity: 0.7;
+    padding-left: 8px;
   }
 `;
 const StyledErrMsg = styled.p`
   font-size: 12px;
   color: red;
   text-align: left;
+  margin-bottom: 10px;
 `;
 const StyledLoginBtn = styled.button`
+  width: 100%;
   background-color: #ff0000;
   color: white;
-  width: 100%;
   border: none;
   padding: 16px;
 `;
@@ -77,16 +85,22 @@ const StyledSigninWithGoogleAccount = styled.div`
 `;
 
 const Login = () => {
-  const [errMsg, setErrMsg] = useState<string>();
+  const LoginErrMsg: string = "아이디 혹은 비밀번호가 일치하지 않습니다.";
   return (
     <StyledCnt>
       <StyledTitle>로그인</StyledTitle>
-      <StyledFieldLabel>아이디</StyledFieldLabel>
-      <StyledField placeholder="아이디를 입력하세요" />
-      <StyledFieldLabel>비밀번호</StyledFieldLabel>
-      <StyledField placeholder="비밀번호를 입력하세요" />
-      {errMsg ? <StyledErrMsg>{errMsg}</StyledErrMsg> : null}
+
+      <StyledFieldWrapper>
+        <StyledFieldLabel>아이디</StyledFieldLabel>
+        <StyledField placeholder="아이디를 입력하세요" />
+
+        <StyledFieldLabel>비밀번호</StyledFieldLabel>
+        <StyledField placeholder="비밀번호를 입력하세요" />
+      </StyledFieldWrapper>
+
+      <StyledErrMsg>{LoginErrMsg}</StyledErrMsg>
       <StyledLoginBtn>로그인</StyledLoginBtn>
+
       <StyledShortcutWrapper>
         <StyledShortcut>아이디 찾기</StyledShortcut>
         <StyledShortcutSeparator />
@@ -94,11 +108,14 @@ const Login = () => {
         <StyledShortcutSeparator />
         <StyledShortcut>회원가입</StyledShortcut>
       </StyledShortcutWrapper>
+
       <StyledOr>OR</StyledOr>
+
       <StyledSigninWithGoogleAccount>
         <img src={googleIcon} alt="" />
         <span>구글 계정으로 로그인</span>
       </StyledSigninWithGoogleAccount>
+
     </StyledCnt>
   );
 };
