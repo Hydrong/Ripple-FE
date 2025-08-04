@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import googleIcon from "../../assets/icons/web_neutral_rd_na@2x.png";
+import { useState } from "react";
 
 const StyledCnt = styled.div`
   width: 80%;
   margin: 0 auto;
-  margin-top: 30%;
+  padding-top: 30%;
   text-align: center;
   font-size: 16px;
 `;
@@ -16,6 +17,9 @@ const StyledFieldWrapper = styled.div`
   margin-bottom: 20px;
 `;
 const StyledFieldLabel = styled.h2`
+  font-size: 12px;
+  color: gray;
+  opacity: 0.8;
   text-align: left;
   padding-left: 8px;
   padding-bottom: 4px;
@@ -32,8 +36,7 @@ const StyledField = styled.input`
   }
   &::placeholder {
     color: gray;
-    font-style: italic;
-    opacity: 0.7;
+    opacity: 0.4;
     padding-left: 8px;
   }
 `;
@@ -85,7 +88,7 @@ const StyledSigninWithGoogleAccount = styled.div`
 `;
 
 const Login = () => {
-  const LoginErrMsg: string = "아이디 혹은 비밀번호가 일치하지 않습니다.";
+  const [isLoginErr, setIsLoginErr] = useState<boolean>(false); // 일시적으로 true로 해둠
   return (
     <StyledCnt>
       <StyledTitle>로그인</StyledTitle>
@@ -98,7 +101,7 @@ const Login = () => {
         <StyledField placeholder="비밀번호를 입력하세요" />
       </StyledFieldWrapper>
 
-      <StyledErrMsg>{LoginErrMsg}</StyledErrMsg>
+        <StyledErrMsg style={{opacity: isLoginErr ? 1:0}}>아이디 혹은 비밀번호가 일치하지 않습니다.</StyledErrMsg>:
       <StyledLoginBtn>로그인</StyledLoginBtn>
 
       <StyledShortcutWrapper>
