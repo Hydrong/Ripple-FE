@@ -1,5 +1,5 @@
-const Landing = () => {
-  return <div>landing</div>;
+const SignUp = () => {
+  return <div>SignUp</div>;
 };
 
-export default Landing;
+export default SignUp;

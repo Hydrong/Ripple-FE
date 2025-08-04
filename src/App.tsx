@@ -2,7 +2,8 @@ import { BrowserRouter, Routes, Route } from "react-router";
 import styled from "styled-components";
 import useIsMobile from "./hooks/useIsMobile";
 import Landing from "./pages/Landing";
-import LogIn from "./pages/LogIn";
+import LogIn from "./pages/Login";
+import SignUp from "./pages/SignUp";
 
 const StyledDesktopErrorCnt = styled.div`
   display: flex;
@@ -19,6 +20,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Landing/>} />
         <Route path="/login" element={<LogIn/>} />
+        <Route path="/signup" element={<SignUp/>} />
       </Routes>
     </BrowserRouter>:
     <StyledDesktopErrorCnt>
