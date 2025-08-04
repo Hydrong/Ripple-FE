@@ -2,13 +2,16 @@ import styled from "styled-components";
 import { useParams } from "react-router";
 import { useEffect, useState } from "react";
 import settingsImg from "../../assets/icons/settings.svg";
+import Navbar from "../../components/Navbar";
 
 const BaseLayout = styled.div`
   padding: 10px;
 `;
 const StyledCnt = styled.div`
   width: 512px;
+  height: 100vh;
   margin: auto;
+  position: relative;
 `;
 const StyledHeader = styled(BaseLayout)`
   background-color: #222;
@@ -39,8 +42,9 @@ const ProfileImage = styled.div<{ img?: string }>`
   background-size: cover;
   height: 50px;
   width: 50px;
+  outline: 3px solid black;
+  border-radius: 1000px;
 `;
-const StyledNavbar = styled(BaseLayout)``;
 
 const Profile = () => {
   const { username } = useParams<{ username: string }>();
@@ -57,8 +61,13 @@ const Profile = () => {
 
   useEffect(() => {
     if (username) {
+      // 사용자 정보 요청
       const { displayName, profileImgSrc } = getUserInfo(username);
 
+      // 프로필 이미지 반영
+      setProfileImgSrc(profileImgSrc);
+
+      // 탭 제목 반영
       document.title = displayName
         ? `Ripple | ${displayName}의 프로필`
         : `Ripple | ${username}의 프로필`;
@@ -78,7 +87,7 @@ const Profile = () => {
           <ProfileImage img={profileImgSrc} />
         </ProfileSection>
       </StyledContent>
-      <StyledNavbar></StyledNavbar>
+      <Navbar />
     </StyledCnt>
   );
 };
