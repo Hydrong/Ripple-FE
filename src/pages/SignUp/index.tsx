@@ -258,7 +258,7 @@ const SignUp = () => {
       </StyledFieldWrapper>
 
 
-      <StyledSignUpBtn>회원가입</StyledSignUpBtn>
+      <StyledSignUpBtn type="submit">회원가입</StyledSignUpBtn>
     </StyledCnt>
   );
 };

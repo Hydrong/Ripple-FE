@@ -1,8 +1,11 @@
 import styled from "styled-components";
 import googleIcon from "../../assets/icons/web_neutral_rd_na@2x.png";
 import { useState } from "react";
+import type { FormValues } from "../../types/LoginFormInterface";
+import { useForm } from "react-hook-form";
+import { Link } from "react-router";
 
-const StyledCnt = styled.div`
+const StyledCnt = styled.form`
   width: 80%;
   margin: 0 auto;
   padding-top: 30%;
@@ -59,8 +62,13 @@ const StyledShortcutWrapper = styled.div`
   justify-content: space-around;
   padding: 20px;
 `;
-const StyledShortcut = styled.a`
+const StyledShortcut = styled(Link)`
   font-size: 12px;
+  color: inherit;
+  text-decoration: none;
+  &:visited {
+    color: inherit;
+  }
 `;
 const StyledShortcutSeparator = styled.span`
   width: 2px;
@@ -88,28 +96,47 @@ const StyledSigninWithGoogleAccount = styled.div`
 `;
 
 const Login = () => {
-  const [isLoginErr, setIsLoginErr] = useState<boolean>(false); // 일시적으로 true로 해둠
+  const {register, handleSubmit, formState: {errors}} = useForm<FormValues>({mode:"onChange"});
+
+  const onSubmit = (data:any) => {
+    /* 로그인 중... */
+    let loginSuccessed = false;
+    if (loginSuccessed) {
+      setIsLoginErr(false);
+      console.log(data); 
+    } else {
+      setIsLoginErr(true);
+    }
+  };
+
+  const [isLoginErr, setIsLoginErr] = useState<boolean>(false);
   return (
-    <StyledCnt>
+    <StyledCnt onSubmit={handleSubmit(onSubmit)}>
       <StyledTitle>로그인</StyledTitle>
 
       <StyledFieldWrapper>
         <StyledFieldLabel>아이디</StyledFieldLabel>
-        <StyledField placeholder="아이디를 입력하세요" />
+        <StyledField placeholder="아이디를 입력하세요"  type="text" 
+          {...register("id", {
+            required: "아이디 입력은 필수입니다.",
+          })}/>
 
         <StyledFieldLabel>비밀번호</StyledFieldLabel>
-        <StyledField placeholder="비밀번호를 입력하세요" />
+        <StyledField placeholder="비밀번호를 입력하세요"  type="text" 
+          {...register("pw", {
+            required: "비밀번호 입력은 필수입니다.",
+          })}/>
       </StyledFieldWrapper>
 
-        <StyledErrMsg style={{opacity: isLoginErr ? 1:0}}>아이디 혹은 비밀번호가 일치하지 않습니다.</StyledErrMsg>:
-      <StyledLoginBtn>로그인</StyledLoginBtn>
+        {isLoginErr && <StyledErrMsg>아이디 혹은 비밀번호가 일치하지 않습니다.</StyledErrMsg>}
+      <StyledLoginBtn type="submit">로그인</StyledLoginBtn>
 
       <StyledShortcutWrapper>
-        <StyledShortcut>아이디 찾기</StyledShortcut>
+        <StyledShortcut to={"/"}>아이디 찾기</StyledShortcut>
         <StyledShortcutSeparator />
-        <StyledShortcut>비밀번호 찾기</StyledShortcut>
+        <StyledShortcut to={"/"}>비밀번호 찾기</StyledShortcut>
         <StyledShortcutSeparator />
-        <StyledShortcut>회원가입</StyledShortcut>
+        <StyledShortcut to={"/signup"}>회원가입</StyledShortcut>
       </StyledShortcutWrapper>
 
       <StyledOr>OR</StyledOr>
