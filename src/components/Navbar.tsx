@@ -33,7 +33,7 @@ const Navbar = () => {
       <StyledShortcut src={homeImg} onClick={() => navigator("/")} />
       <StyledShortcut src={searchImg} onClick={() => navigator("/search")} />
       <StyledShortcut src={feedImg} onClick={() => navigator("/upload")} />
-      <StyledShortcut src={accountImg} onClick={() => navigator("/account")} />
+      <StyledShortcut src={accountImg} onClick={() => navigator("/username")} />
     </StyledCnt>
   );
 };
