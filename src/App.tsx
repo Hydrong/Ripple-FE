@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router";
 import styled from "styled-components";
 import useIsMobile from "./hooks/useIsMobile";
 import Landing from "./pages/Landing";
+import Profile from "./pages/Profile";
 import LogIn from "./pages/Login";
 import SignUp from "./pages/SignUp";
 
@@ -18,7 +19,8 @@ function App() {
     isMobile ?
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Landing/>} />
+        <Route path="/" element={<Landing />} />
+        <Route path="/:username" element={<Profile />} />
         <Route path="/login" element={<LogIn/>} />
         <Route path="/signup" element={<SignUp/>} />
       </Routes>
